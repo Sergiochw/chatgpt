@@ -1,0 +1,235 @@
+:root {
+  color-scheme: light dark;
+  --font-stack: 'Fira Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  --background: #0f172a;
+  --background-light: #f8fafc;
+  --surface: rgba(15, 23, 42, 0.75);
+  --surface-light: #e2e8f0;
+  --accent: #38bdf8;
+  --text: #e2e8f0;
+  --text-muted: rgba(226, 232, 240, 0.75);
+  --error: #fca5a5;
+  --warning: #fbbf24;
+  --text-light: #0f172a;
+  --shadow: 0 20px 45px rgba(15, 23, 42, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-stack);
+  background: linear-gradient(160deg, #1e293b, #0f172a 55%, #020617 100%);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  padding: 3rem 1rem 1.5rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.app-header p {
+  margin: 0.75rem auto 0;
+  max-width: 40rem;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+.app-main {
+  flex: 1;
+  display: grid;
+  gap: 1.5rem;
+  padding: 0 1.5rem 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: stretch;
+}
+
+.editor,
+.console {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+textarea#python-editor {
+  flex: 1;
+  padding: 1.5rem;
+  border: none;
+  resize: none;
+  font-family: var(--font-stack);
+  font-size: 1rem;
+  background: transparent;
+  color: inherit;
+  line-height: 1.6;
+  caret-color: var(--accent);
+}
+
+textarea#python-editor:focus {
+  outline: none;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem 1.5rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: white;
+  box-shadow: 0 12px 25px rgba(56, 189, 248, 0.35);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(99, 102, 241, 0.35);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  box-shadow: none;
+}
+
+button#clear-button {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: rgba(226, 232, 240, 0.9);
+  box-shadow: none;
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem 0.75rem;
+}
+
+.console-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.status {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+pre#console-output {
+  flex: 1;
+  margin: 0;
+  padding: 1.5rem;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  background: rgba(15, 23, 42, 0.6);
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.console-line {
+  margin: 0 0 0.75rem;
+  display: block;
+}
+
+.console-line:last-child {
+  margin-bottom: 0;
+}
+
+.console-line .timestamp {
+  color: var(--text-muted);
+  margin-right: 0.75rem;
+}
+
+.console-line .message {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.console-line.error .message {
+  color: var(--error);
+}
+
+.console-line.warning .message {
+  color: var(--warning);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding-top: 2.5rem;
+  }
+
+  .editor-actions {
+    flex-direction: column;
+  }
+}
+
+body.light-mode {
+  background: linear-gradient(160deg, #eff6ff, #dbeafe 55%, #bfdbfe 100%);
+  color: var(--text-light);
+}
+
+body.light-mode .editor,
+body.light-mode .console {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(148, 163, 184, 0.35);
+  color: var(--text-light);
+}
+
+body.light-mode button#clear-button {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-light);
+}
+
+body.light-mode pre#console-output {
+  background: rgba(226, 232, 240, 0.4);
+  color: var(--text-light);
+}
+
+body.light-mode .console-line .timestamp {
+  color: rgba(100, 116, 139, 0.8);
+}
+
+body.light-mode .console-line.error .message {
+  color: #dc2626;
+}
+
+body.light-mode .console-line.warning .message {
+  color: #d97706;
+}
