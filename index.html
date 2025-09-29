@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser Python Playground</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"
+      as="script"
+    />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Browser Python Playground</h1>
+      <p>Run Python directly in your browser and inspect the console output.</p>
+    </header>
+
+    <main class="app-main">
+      <section class="editor">
+        <label for="python-editor" class="visually-hidden">Python code editor</label>
+        <textarea id="python-editor" spellcheck="false"></textarea>
+        <div class="editor-actions">
+          <button id="run-button" type="button">Run ▶</button>
+          <button id="clear-button" type="button">Clear Console</button>
+        </div>
+      </section>
+
+      <section class="console" aria-live="polite" aria-label="Python console output">
+        <header class="console-header">
+          <h2>Console</h2>
+          <div class="status" id="runtime-status">Loading Python runtime…</div>
+        </header>
+        <pre id="console-output"></pre>
+      </section>
+    </main>
+
+    <template id="sample-code">
+print("Hello from Python 👋")
+for i in range(3):
+    print(f"Counting: {i}")
+
+# You can import many popular packages pre-built for Pyodide
+import sys
+print("Python", sys.version)
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
